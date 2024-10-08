@@ -21,10 +21,10 @@ public:
     int result;
     int dfs(TreeNode* root)
     {
-        if(root==nullptr)
-            return 0;
-        int l = dfs(root->left);
-        int r = dfs(root->right);
+        // if(root==nullptr)
+        //     return 0;
+        int l = root->left==nullptr ? 0 : dfs(root->left);
+        int r = root->right ==nullptr ? 0 : dfs(root->right);
         result = max(root->val , result);
         result = max(root->val + l + r ,result);
         result = max(root->val + l,result);
