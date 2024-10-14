@@ -1,23 +1,26 @@
 class Solution {
 public:
     int numSplits(string s) {
-        vector<vector<int>> dp(s.size(), vector<int>(26,0));
-        dp[0][s[0] - 'a'] = 1;
-        for(int i=1;i<s.size();i++)
-            for(int j=0;j<26;j++)
-                dp[i][j] = dp[i-1][j] + int((j+'a') == s[i]);
-        int result =0;
-        for(int i=0;i<s.size()-1;i++)
-        {
-            int c1=0,c2=0;
-            for(int j=0;j<26;j++)
-            {
-                if(dp[i][j])
-                    c1++;
-                if(dp[s.size()-1][j]!= dp[i][j])
-                    c2++;
-            }
-            result+= (c1==c2);
+        int n = s.size();
+        unordered_map<char, int> count;
+        unordered_map<char, int> scount;
+
+        for (int i = 0; i < n; i++) {
+            if (count.find(s[i]) == count.end())
+                count[s[i]] = 0;
+            count[s[i]]++;
+        }
+        int result = 0;
+        int cur = count.size();
+        for (int i = 0; i < n - 1; i++) {
+            if (scount.find(s[i]) == scount.end())
+                scount[s[i]] = 0;
+            scount[s[i]]++;
+            count[s[i]]--;
+            if (count[s[i]] == 0)
+                cur--;
+            if (scount.size() == cur)
+                result++;
         }
         return result;
     }
