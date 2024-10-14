@@ -1,3 +1,11 @@
+#pragma GCC optimize("Ofast")
+#pragma GCC target("avx2, bmi, bmi2, lzcnt, popcnt")
+static const bool __boost = []() {
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return ios_base::sync_with_stdio(false);
+}();
+
 class Solution {
 public:
     int numSplits(string s) {
